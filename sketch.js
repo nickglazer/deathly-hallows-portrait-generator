@@ -147,7 +147,7 @@ const fileDropHandler = file => {
 
 const saveCanvasHandler = e => {
   let filename = e.target.elements.saveFilename.value || 'DeathlyHallowsPortrat';
-  saveCanvas(`${filename}-${Date.now().toString()}`, 'jpg');
+  saveCanvas(`${filename}-${Date.now().toString()}`, 'png');
   e.preventDefault();
   return false;
 }
