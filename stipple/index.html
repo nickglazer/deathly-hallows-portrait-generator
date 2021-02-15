@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Stipple Effect</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.js"></script>
+    <script src="sketch.js"></script>
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    <main>
+      <div id="menu">
+        <form id="parameterForm">
+          <input id="maskSizeInput" type="number" min="0" value="10">Mask Size</input>
+          <input id="paddingSizeInput" type="number" min="0" value="0">Padding</input>
+          <select id="methodInput" selected="prob">
+            <option value="fixed">Fixed</option>
+            <option value="prob">Probabilistic</option>
+          </select>
+          <input id="invertCheckbox" type="checkbox">Invert</input>
+          <input id="displayImageInput" type="checkbox">Display image</input>
+          <input type="submit" value="Draw"></input>
+        </form>
+        <div id="fileSelector">
+          <p id="dropzone">Drag your file here</p>
+          <p id="currentFilename"></p>
+        </div>
+        <form id="saveForm">
+          <input id="saveFilename" type="text" placeholder="StippledImage">Name</input>
+          <input type="submit" value="Save"></input>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
