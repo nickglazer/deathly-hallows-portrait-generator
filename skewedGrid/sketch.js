@@ -1,6 +1,8 @@
+const DEBUG = false;
 let pixels = [], destinations = [];
 
 function setup() {
+  angleMode(DEGREES);
   createCanvas(520, 520);
   background(0);
   stroke(255);
@@ -39,7 +41,7 @@ const setupSketch = seed => {
   background(255);
   randomSeed(seed);
 
-  pixels = [], destinations = []
+  pixels = [], destinations = [];
 
   for (let i = 60; i < 461; i += 40) {
     let row = [], destinationsRow = [];
@@ -74,12 +76,21 @@ function draw() {
     for (let j = 0; j < pixels[0].length; j++) {
       const [destX, destY] = destinations[i][j];
       const [pixelX, pixelY] = pixels[i][j];
-      if (destX - pixelX > 1 || destY - pixelY > 1) {
+      const distance = dist(pixelX, pixelY, destX, destY);
+      if (distance > 1) {
         done = false;
       }
-      const deltaX = (destX - pixelX) * 0.01;
-      const deltaY = (destY - pixelY) * 0.01;
-      pixels[i][j] = [pixelX + deltaX, pixelY + deltaY];
+      const heading = atan2(destY - pixelY, destX - pixelX);
+      const delta = getDisplacement(heading, distance * 0.02);
+      pixels[i][j] = [pixelX + delta.x, pixelY + delta.y];
+    }
+  }
+
+  if (DEBUG) {
+    for (let i = 0; i < destinations.length; i++) {
+      for (let j = 0; j < destinations[0].length; j++) {
+        circle(destinations[i][j][0], destinations[i][j][1], 2)
+      }
     }
   }
   
@@ -110,3 +121,6 @@ function draw() {
     noLoop();
   }
 }
+
+const getDisplacement = (angle, speed) =>
+  ({ x: speed * cos(angle), y: speed * sin(angle)});
